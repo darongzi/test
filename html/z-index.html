@@ -1,0 +1,215 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>z-index</title>
+    <meta charset="utf-8"/>
+    <style type="text/css">
+        body {
+            font: 12px/20px Microsoft Yahei, Arial;
+            padding: 20px;
+            background-color: #FFFFFF;
+            text-shadow: 1px 1px 1px #FFF;
+        }
+        a {
+            color: #1779AE;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #25869A;
+            text-decoration: none;
+        }
+        pre {
+            position: relative;
+            padding: 50px 20px 20px;
+            box-shadow: 2px 2px 6px #AAA;
+            border-radius: 5px;
+            background-color: #CCC;
+        }
+        pre:before {
+            content:'  Code';
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #000;
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            border-bottom: 1px solid #999;
+            border-radius: 5px 5px 0 0;
+            background-color: #BBB;
+            background: -webkit-gradient(top, #DDD, #AAA);
+            background: -webkit-linear-gradient(top, #DDD, #AAA);
+            background: -moz-linear-gradient(top, #DDD, #AAA);
+            background: -o-linear-gradient(top, #DDD, #AAA);
+            background: linear-gradient(top, #DDD, #AAA);
+        }
+
+        .clearfix {
+            *zoom : 1;
+        }
+        .clearfix:after {
+            content : ' ';
+            display : block;
+            clear   : both;
+            height  : 0;
+        }
+
+        .fl {
+            float: left;
+        }
+
+        /**************************************************/
+
+        em {
+            color: #418EFF;
+            padding: 0 3px;
+            box-shadow: 0 1px 2px #666;
+            font-style: normal;
+            font-weight: block;
+            border-radius: 4px;
+
+            background: -webkit-gradient(top, #FFF, #FF0);
+            background: -webkit-linear-gradient(top, #FFF, #FF0);
+            background: -moz-linear-gradient(top, #FFF, #FF0);
+            background: -o-linear-gradient(top, #FFF, #FF0);
+            background: linear-gradient(top, #FFF, #FF0);
+        }
+
+        /**************************************************/
+
+        .wrapper {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 25px;
+        }
+
+        .red, .green, .blue {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+        }
+        .red {
+            left: 0;
+            top: 0;
+            background-color: red;
+        }
+        .green {
+            left: 40px;
+            top: 40px;
+            background-color: green;
+        }
+        .blue {
+            left: 80px;
+            top: 80px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>z-index</h1>
+    </header>
+    <article>
+        <h3>堆栈上下文有三种方法可以在一个元素上形成：</h3>
+        <ul>
+            <li>当一个元素是文档的根元素时（&lt;html&gt;元素）</li>
+            <li>当一个元素有一个position值而不是static，有一个z-index值而不是auto</li>
+            <li>当一个元素有一个opacity值小于1</li>
+        </ul>
+    </article>
+    <article>
+        <h3>下面是几条基本的规则，来决定在一个单独的堆栈上下文里的堆栈顺序（从后向前）：</h3>
+        <ul>
+            <li>堆栈上下文的根元素定位元素（和他们的子元素）带着负数的z-index值（高的值被堆叠在低值的前面；相同值的元素按照在HTML中出现的顺序堆叠）</li>
+            <li>非定位元素（按照在HTML中出现的顺序排序）</li>
+            <li>定位元素（和他们的子元素）带着auto的z-index值（按照在HTML中出现的顺序排序）</li>
+            <li>定位元素（和他们的子元素）带着正z-index值（高的值被堆叠在低值的前面；相同值的元素按照在HTML中出现的顺序堆叠）</li>
+        </ul>
+        <p>
+            注 解：定位元素带有负的z-index值被在一个堆栈上下文中先排序，这意味着他们出现在所有其他元素的后面。正因如此，它使一个元素出现在自己父元素之后 成为可能，这以前通常是不可能的事。当然，这局限于它的父元素与它在同一个堆栈上下文，并且不是那个堆栈上下文的根元素。一个伟大的例子如Nicolas Gallagher的CSS不用图像降低阴影。
+        </p>
+    </article>  
+    <div class="clearfix">
+        <section class="wrapper fl">
+            <div>
+                <span class="red"></span>
+            </div>
+            <div>
+                <span class="green"></span>
+            </div>
+            <div>
+                <span class="blue"></span>
+            </div>
+        </section>
+        <pre class="fl">
+            &lt;section class="wrapper"&gt;
+                &lt;div&gt;
+                    &lt;span class="red"&gt;&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    &lt;span class="green"&gt;&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    &lt;span class="blue"&gt;&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/section&gt;
+        </pre>
+    </div>
+    <div class="clearfix">
+        <section class="wrapper fl">
+            <div>
+                <span class="red" style="z-index:1;"></span>
+            </div>
+            <div>
+                <span class="green"></span>
+            </div>
+            <div>
+                <span class="blue"></span>
+            </div>
+        </section>
+        <pre class="fl">
+            &lt;section class="wrapper"&gt;
+                &lt;div&gt;
+                    &lt;span class="red" <em>style="z-index:1;"</em>&gt;&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    &lt;span class="green"&gt;&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    &lt;span class="blue"&gt;&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/section&gt;
+        </pre>
+    </div>
+    <div class="clearfix">
+        <section class="wrapper fl">
+            <div style="opacity:0.99;">
+                <span class="red" style="z-index:1;"></span>
+            </div>
+            <div>
+                <span class="green"></span>
+            </div>
+            <div>
+                <span class="blue"></span>
+            </div>
+        </section>
+        <pre class="fl">
+            &lt;section class="wrapper"&gt;
+                &lt;div <em>style="opacity:0.99;"</em>&gt;
+                    &lt;span class="red" <em>style="z-index:1;"</em>&gt;&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    &lt;span class="green"&gt;&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    &lt;span class="blue"&gt;&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/section&gt;
+        </pre>
+    </div>
+    <footer>
+        <a href="http://www.qianduan.net/that-thing-on-the-z-index.html" target="_blank">原文链接</a>
+    </footer>
+</body>
+</html>
