@@ -1,0 +1,128 @@
+/* base.css */
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img {
+  margin: 0;
+  padding: 0; }
+
+section, article, nav, header, footer {
+  display: block; }
+
+address, caption, cite, code, dfn, th, var, i, em {
+  font-style: normal;
+  font-weight: normal; }
+
+pre {
+  margin: 0; }
+
+em, i {
+  font-weight: normal; }
+
+table {
+  border-collapse: collapse; }
+
+fieldset, img {
+  border: 0; }
+
+ul, ol {
+  list-style: none; }
+
+select, input {
+  vertical-align: middle;
+  outline: none; }
+
+h1, h2, h3, h4, h5, strong, em {
+  font-weight: normal; }
+
+h1, h2 {
+  font-size: 1.5em; }
+
+h3 {
+  font-size: 1.17em; }
+
+select, input, textarea {
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  font-family: arial, sans-serif; }
+
+textarea {
+  resize: none;
+  overflow: auto;
+  word-break: break-all;
+  word-wrap: break-word; }
+
+body {
+  background-color: #F6F6F6;
+  color: #000;
+  font: 12px/20px arial, sans-serif;
+  padding: 20px;
+  text-shadow: 0 1px 1px #FFF; }
+
+a {
+  color: #37a7dd;
+  text-decoration: none;
+  outline: none; }
+  a:hover {
+    color: #196d95;
+    text-decoration: underline; }
+  a:focus {
+    outline: none; }
+
+.fl {
+  float: left; }
+
+.fr {
+  float: right; }
+
+.mgb20 {
+  margin-bottom: 20px; }
+
+.mgb10 {
+  margin-bottom: 10px; }
+
+.clearfix {
+  *zoom: 1; }
+  .clearfix:after {
+    content: ' ';
+    display: block;
+    clear: both;
+    height: 0; }
+
+/* module css*/
+pre {
+  position: relative;
+  padding: 50px 20px 20px;
+  box-shadow: 2px 2px 6px #AAA;
+  border-radius: 5px;
+  background-color: #F5F5F5; }
+
+pre:before {
+  content: '  Code';
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #000;
+  width: 100%;
+  height: 25px;
+  line-height: 25px;
+  border-bottom: 1px solid #999;
+  border-radius: 5px 5px 0 0;
+  background-color: #FFF;
+  background: -webkit-gradient(top, #f7f7f7, #dbdbdb);
+  background: -webkit-linear-gradient(top, #f7f7f7, #dbdbdb);
+  background: -moz-linear-gradient(top, #f7f7f7, #dbdbdb);
+  background: -o-linear-gradient(top, #f7f7f7, #dbdbdb);
+  background: linear-gradient(top, #f7f7f7, #dbdbdb); }
+
+em {
+  color: #418EFF;
+  padding: 0 3px;
+  box-shadow: 0 1px 2px #666;
+  font-style: normal;
+  font-weight: block;
+  border-radius: 4px;
+  background: -webkit-gradient(top, white, yellow);
+  background: -webkit-linear-gradient(top, white, yellow);
+  background: -moz-linear-gradient(top, white, yellow);
+  background: -o-linear-gradient(top, white, yellow);
+  background: linear-gradient(top, white, yellow); }

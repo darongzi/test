@@ -1,0 +1,84 @@
+﻿/* base.css */
+
+// reset
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img {
+    margin  : 0;
+    padding : 0;
+}
+section, article, nav, header, footer { display : block; }
+address, caption, cite, code, dfn, th, var,i,em {
+    font-style  : normal;
+    font-weight : normal;
+}
+pre   { margin: 0; }
+em, i { font-weight : normal; }
+table         { border-collapse : collapse; }
+fieldset, img { border : 0; }
+ul, ol        { list-style : none; }
+select, input { vertical-align : middle; outline : none; }
+h1, h2, h3, h4, h5, strong, em { font-weight : normal; }
+h1, h2{font-size: 1.5em;}
+h3 {font-size: 1.17em;}
+select, input, textarea {
+    font-size   : 12px; 
+    margin      : 0;
+    padding     : 0;
+    outline     : none;
+    font-family : arial, sans-serif;
+}
+textarea { 
+    resize   : none;
+    overflow : auto;
+    word-break : break-all;
+    word-wrap  : break-word;
+}
+
+body {
+    background-color: #F6F6F6;
+    color : #000;
+    font  : 12px/20px arial, sans-serif;
+    padding : 20px;
+    text-shadow: 0 1px 1px #FFF;
+}
+
+// 链接色
+$a_color: #37A7DD;
+a {
+    color : $a_color;
+    text-decoration : none;
+    outline: none;
+    &:hover {
+        color : darken($a_color , 20%);
+        text-decoration : underline;
+    }
+    &:focus {
+        outline : none;
+    }
+}
+
+// 通用
+
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+
+.mgb20 { margin-bottom: 20px; }
+.mgb10 { margin-bottom: 10px; }
+
+// 清除浮动
+
+.clearfix {
+    *zoom : 1;
+
+    &:after {
+        content : ' ';
+        display : block;
+        clear   : both;
+        height  : 0;
+    }
+}
+
+@import "widget/module";
