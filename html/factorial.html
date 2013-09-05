@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>factorial</title>
+    <style type="text/css">
+    body {
+        height: 2000px;
+    }
+    .area {
+        width   : 100%;
+        overflow: auto;
+        padding : 10px;
+        color   : #1515FF;
+        word-break : break-all;
+        word-wrap  : break-word;
+        font-family: Microsoft Yahei;
+        background-color: #F2F2F2;
+    }
+    </style>
+</head>
+<body>
+    <div class="area" id="J_rstArea">
+    </div>
+<script type="text/javascript">
+(function(){
+    var loopTime;
+    var cut = 15;
+    var cut_str = '000000000000000';
+    function cale( n , rst ){
+        loopTime = loopTime || new Date();
+        if ( new Date()-loopTime > 100 ) {
+            loopTime = new Date();
+            setTimeout(function(){loop(n , rst)}, 13);
+        } else {
+            loop(n , rst);
+        }
+    }
+    function loop(n , rst){
+        if (n <= 1) {
+            complete( rst );
+            return;
+        };
+        rst = rst || '1'; // 被乘数
+        var rst_len = rst.length;
+        var jinwei = jinwei || '';
+
+        var i = 0;
+        for ( ; i < rst_len; i+=cut ){
+            var t = rst.substring( rst_len-i-cut , rst_len-i )
+            ,   r = ( t * n + jinwei*1 ).toString();
+            
+            if (r == 0) continue;
+
+            var new_rst = rst.substring(0,rst_len-i-cut) + cut_str.substring(0 , cut - r.length ) +r.substring(r.length-cut,r.length) + rst.substring(rst_len-i,rst_len);
+            
+            jinwei = r.substring(0,r.length-cut);
+            rst = new_rst;
+        }
+        if( jinwei != '' ){
+            rst = jinwei + rst ;
+        }
+        return cale( n-1 , rst );
+    };
+    function complete( rst ){
+        rst = rst.replace(/^0+/ , '');
+        var time = new Date() - startTime;
+        
+        var rstArea = document.getElementById('J_rstArea');
+        var pElement = document.createElement('p');
+        var pElement2 = document.createElement('p');
+        var timeNode = document.createTextNode('Time: ' + time + 'ms');
+        var rstNode = document.createTextNode('Result: ' + rst);
+        pElement.style.color = 'red';
+        
+        pElement.appendChild(timeNode);
+        pElement2.appendChild(rstNode);
+        rstArea.appendChild(pElement);
+        rstArea.appendChild(pElement2);
+    };
+
+    var n = window.location.search.split('?')[1].split('=')[1];
+
+    var startTime = new Date();
+    
+    cale( n );
+    
+    
+    
+})();
+</script>
+</body>
+</html>
