@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>$1000，用零钱怎么来凑。。。</title>
+    <style type="text/css">
+    .row {
+        color: #FFF;
+        text-shadow: 1px 1px #CCC;
+        padding-right: 15px;
+    }
+    .cnt {
+        color: blue;
+        display: inline-block;
+        width: 40px;
+    }
+    .coin {
+        display: inline-block;
+        width: 30px;
+        text-align: right;
+    }
+    .comb {
+        padding: 10px;
+        font-family: "Microsoft Yahei";
+        background : #EFEFEF;
+        text-shadow: 1px 1px #FFF;
+    }
+    </style>
+</head>
+<body>
+<p>$1000，零钱怎么凑。。。</p>
+<p id="J_money" class="blue">5 2 1</p>
+
+<p>卧槽，得有多少种啊a....</p>
+<div id="J_combination" class="comb"></div>
+<script type="text/javascript">
+(function(){
+
+    var total = 10;
+    var tpl = '<span class="coin">{#coin}</span> * <span class="cnt">{#cnt}</span>';
+    function getComb( coins ){
+        var html = [];
+
+        var tCoin = coins[0];
+        var cnt = Math.floor( total / tCoin ); 
+        
+
+        for ( var i = cnt; i>=0; i-- ) {
+            html.push('+' + tpl.replace('{#coin}', tCoin).replace('{#cnt}', i));
+            var remainder = total - i * tCoin;   // 余下的money
+        }
+
+        return html.concat( getComb );
+    };
+
+    var coins = document.getElementById('J_money').innerHTML.split(/\s+/);
+    var combEle = document.getElementById('J_combination');
+    var theCoinComb = getComb( coins );
+    combEle.innerHTML += theCoinComb;
+})();
+</script>
+</body>    
+</html>
