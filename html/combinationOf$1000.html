@@ -21,8 +21,10 @@
     }
     .comb {
         padding: 10px;
+        width: 600px;
+        height: 300px;
         font-family: "Microsoft Yahei";
-        background : #EFEFEF;
+        background : #FFF;
         text-shadow: 1px 1px #FFF;
     }
     </style>
@@ -32,42 +34,60 @@
 <p id="J_money" class="blue">5 2 1</p>
 
 <p>卧槽，得有多少种啊a....</p>
-<div id="J_combination" class="comb"></div>
 <script type="text/javascript">
 (function(){
+    var coins = [5,2,1];
+    var tpl = '{#coin} * {#cnt}';
+    var docBody = document.body;
 
-    var total = 10;
-    var tpl = '<span class="coin">{#coin}</span> * <span class="cnt">{#cnt}</span>';
-    function getComb( coins ){
-        var html = [];
-
-        var tCoin = coins[0]; // 5
-        var cnt = Math.floor( total / tCoin ); //2
+    function getComb( total ){
         
+        if ( total <= 0 ) return;
 
-        for ( var i = cnt; i>=0; i-- ) { //1
-            html.push('+' + formatTpl( tpl , {
-                'coin' : coin, // 5
-                'cnt'  : cnt   // 1
-            }) );
-            var remainder = total - i * tCoin;   // 余下的money 5
+        var html = [];
+        var tCoin;
+        var cnt;
+        
+        for ( var i = 0; i < coins.length; i++ ){
+
+            tCoin = coins[i];
+            
+            //3 第一个金额的最多使用数
+            cnt = Math.floor( total / tCoin );
+            
+            //4 如果，第一个金额的最多使用数 < 1，继续下个值
+            if ( cnt < 1 ) continue;
+
+            getTheCoinComb( tCoin , cnt , total );
         }
 
-        return html.concat( getComb );
     };
+    // tCoin , max use time
+    function getTheCoinComb( tCoin , cnt , total ){
+        for ( var j = cnt; j > 0; j-- ) {
 
+            var rst = tCoin + '*' + j;
+            var cha = total - tCoin * j;
+
+            rst += getComb(cha);
+            
+            var newEle = document.createElement('p')
+            var newTxtNode = document.createTextNode(rst + 'who are you ?' + cha);
+            newEle.appendChild(newTxtNode);
+            docBody.appendChild(newEle);
+        }
+    }
     function formatTpl( tpl , config ){
         for ( var i in config ){
             if ( !config.hasOwnProperty(i) ) {
                 continue;
             }
-            tpl = tpl.replace('{#'+i+'}',config[i]);
+            tpl = tpl.replace('{#'+i+'}' , config[i] );
         };
         return tpl;
     };
 
-    var combEle = document.getElementById('J_combination');
-    combEle.innerHTML = getComb( [5,2,1] );
+    getComb(10);
 })();
 </script>
 </body>    
