@@ -1,94 +1,1 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>$1000，用零钱怎么来凑。。。</title>
-    <style type="text/css">
-    .row {
-        color: #FFF;
-        text-shadow: 1px 1px #CCC;
-        padding-right: 15px;
-    }
-    .cnt {
-        color: blue;
-        display: inline-block;
-        width: 40px;
-    }
-    .coin {
-        display: inline-block;
-        width: 30px;
-        text-align: right;
-    }
-    .comb {
-        padding: 10px;
-        width: 600px;
-        height: 300px;
-        font-family: "Microsoft Yahei";
-        background : #FFF;
-        text-shadow: 1px 1px #FFF;
-    }
-    </style>
-</head>
-<body>
-<p>$1000，零钱怎么凑。。。</p>
-<p id="J_money" class="blue">5 2 1</p>
-
-<p>卧槽，得有多少种啊a....</p>
-<script type="text/javascript">
-(function(){
-    var coins = [5,2,1];
-    var tpl = '{#coin} * {#cnt}';
-    var docBody = document.body;
-
-    function getComb( total ){
-        
-        if ( total <= 0 ) return;
-
-        var html = [];
-        var tCoin;
-        var cnt;
-        
-        for ( var i = 0; i < coins.length; i++ ){
-
-            tCoin = coins[i];
-            
-            //3 第一个金额的最多使用数
-            cnt = Math.floor( total / tCoin );
-            
-            //4 如果，第一个金额的最多使用数 < 1，继续下个值
-            if ( cnt < 1 ) continue;
-
-            getTheCoinComb( tCoin , cnt , total );
-        }
-
-    };
-    // tCoin , max use time
-    function getTheCoinComb( tCoin , cnt , total ){
-        for ( var j = cnt; j > 0; j-- ) {
-
-            var rst = tCoin + '*' + j;
-            var cha = total - tCoin * j;
-
-            rst += getComb(cha);
-            
-            var newEle = document.createElement('p')
-            var newTxtNode = document.createTextNode(rst + 'who are you ?' + cha);
-            newEle.appendChild(newTxtNode);
-            docBody.appendChild(newEle);
-        }
-    }
-    function formatTpl( tpl , config ){
-        for ( var i in config ){
-            if ( !config.hasOwnProperty(i) ) {
-                continue;
-            }
-            tpl = tpl.replace('{#'+i+'}' , config[i] );
-        };
-        return tpl;
-    };
-
-    getComb(10);
-})();
-</script>
-</body>    
-</html>
+<!DOCTYPE html><html><head>    <meta charset="utf-8" />    <title>$1000，用零钱怎么来凑。。。</title>    <style type="text/css">    .row {        color: #FFF;        text-shadow: 1px 1px #CCC;        padding-right: 15px;    }    .cnt {        color: blue;        display: inline-block;        width: 40px;    }    .coin {        display: inline-block;        width: 30px;        text-align: right;    }    .comb {        padding: 10px;        width: 600px;        height: 300px;        font-family: "Microsoft Yahei";        background : #FFF;        text-shadow: 1px 1px #FFF;        color : blue;        font-size: 14px;    }    </style></head><body><p>$10，零钱怎么凑。。。</p><p id="J_money" class="blue">5 2 1</p><p>卧槽，得有多少种啊a....</p><textarea id="J_textArea" class="comb"></textarea><script type="text/javascript">(function(){var numComb = function ( total ) {    this.total = total;    this.coins = [5,2,1];};numComb.prototype = {    getTotalComb: function () {        var that = this,            coins = that.coins;        var rst = '';        for ( var i = 0; i < coins.length; i++ ) {            rst += coins[i] + '的算式如下：\r\n\r\n' + that.getTheCoinComb( coins[i] );        }        return rst;    },    // 每个coin的组合    getTheCoinComb: function( coin , total , prevExp ) {        if ( !coin ) return '';                var that = this,            total = total || that.total;        var maxCnt = Math.floor(total / coin); // max count coin that will combinate total number.        return that.getEveryCountExpression( maxCnt , coin , total , prevExp );    },    // 每个coin下每种数量的组合    getEveryCountExpression: function( cnt , coin , total , prevExp ){        if ( cnt <= 0 ) return '';        var that = this;        var expression =  coin + ' * ' + cnt;        var cha = total - coin * cnt;        //当还有余额时，需要进行下个coin的组合计算        if ( cha > 0 ) {            var nextCoin = that.getNextCoin( coin );            if ( !nextCoin ) return '';            expression =  that.getTheCoinComb( nextCoin , cha , expression );        }        var nextCntExp = that.getEveryCountExpression( cnt-1 , coin , total , prevExp );        expression = (prevExp ? prevExp + '  +  ' :'') + expression + '\r\n' + nextCntExp;        return expression;    },    getNextCoin: function( coin ){        var that = this,            coins = that.coins;        for ( var i = 0; i < coins.length; i++ ){            if ( coin == coins[i]) {                return coins[i+1];            }        }        return false;    }};var numComb1 = new numComb( 10 );document.getElementById('J_textArea').value = numComb1.getTotalComb();})();</script></body>    </html>
