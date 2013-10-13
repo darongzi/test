@@ -1,0 +1,95 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>transform</title>
+	<style type="text/css">
+	body {
+		padding: 20px;
+	}
+	.hehe {
+		width: 600px;
+		height: 600px;
+		margin: 100px auto;
+	}
+	.inner {
+		width: 200px;
+		height: 200px;
+		float: left;
+		transition-duration:1s;
+		background: url('../image/max.jpeg') no-repeat;
+	}
+
+	.inner1 {
+		background-position: 0 0;
+	}
+	.inner2 {
+		background-position: -200px 0;
+	}
+	.inner3 {
+		background-position: -400px 0;
+	}
+	.inner4 {
+		background-position: 0 -200px;
+	}
+	.inner5 {
+		background-position: -200px -200px;
+	}
+	.inner6 {
+		background-position: -400px -200px;
+	}
+	.inner7 {
+		background-position: 0 -400px;
+	}
+	.inner8 {
+		background-position: -200px -400px;
+	}
+	.inner9 {
+		background-position: -400px -400px;
+	}
+
+	.hehe:hover .inner {
+		opacity: 0;
+	}
+	.hehe:hover .inner1 {
+		-webkit-transform: translate(-200px,-200px) rotate(1080deg);
+	}
+	.hehe:hover .inner2 {
+		-webkit-transform: translate(0,-200px) rotate(1080deg);
+	}
+	.hehe:hover .inner3 {
+		-webkit-transform: translate(200px,-200px) rotate(1080deg);
+	}
+	.hehe:hover .inner4 {
+		-webkit-transform: translate(-200px,0) rotate(1080deg);
+	}
+	.hehe:hover .inner5 {
+		-webkit-transform: translate(0,0) rotate(1080deg);
+	}
+	.hehe:hover .inner6 {
+		-webkit-transform: translate(200px,0) rotate(1080deg);
+	}
+	.hehe:hover .inner7 {
+		-webkit-transform: translate(-200px,200px) rotate(1080deg);
+	}
+	.hehe:hover .inner8 {
+		-webkit-transform: translate(0,200px) rotate(1080deg);
+	}
+	.hehe:hover .inner9 {
+		-webkit-transform: translate(200px,200px) rotate(1080deg);
+	}
+	</style>
+</head>
+<body>
+<div class="hehe">
+	<div class="inner inner1"></div>
+	<div class="inner inner2"></div>
+	<div class="inner inner3"></div>
+	<div class="inner inner4"></div>
+	<div class="inner inner5"></div>
+	<div class="inner inner6"></div>
+	<div class="inner inner7"></div>
+	<div class="inner inner8"></div>
+	<div class="inner inner9"></div>
+</div>
+</body>
+</html>
