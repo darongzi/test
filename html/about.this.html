@@ -1,0 +1,96 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>ablout this</title>
+	<link rel="stylesheet" type="text/css" href="../css/base.css" />
+	<style type="text/css">
+	h3 { margin: 20px 0;}
+	p { margin-top: 20px;}
+	</style>
+</head>
+<body>
+	<h2>about this（备忘）</h2>
+	<h3>1.函数调用</h3>
+	<pre>
+		var x = 1;
+
+		function fn(){
+
+			return this.x;
+
+		}
+
+		fn(); // 1;
+	</pre>
+	<p>this指向函数运行时的作用域</p>
+	<h3>2.作为对象的方法调用</h3>
+	<pre>
+		var x = 1;
+
+		var obj = {
+			
+			x  : 0,
+
+			fn : function(){
+
+				return this.x;
+			
+			}
+
+		};
+
+		obj.fn(); // 0;
+	</pre>
+	<p>this指向所在对象</p>
+	<h3>3.构造函数</h3>
+	<pre>
+		var x = 1;
+
+		var Fn = function(){
+
+			this.x = 0;
+
+		};
+
+		var fn = new Fn();
+
+		fn.x  // 0
+
+		x     // 1
+
+	</pre>
+	<h3>3.apply调用模式</h3>
+	<pre>
+		var x = 1;
+
+		function fn(){
+
+			return this.x;
+
+		}
+
+		var obj = {};
+
+		obj.x = 0;
+
+		obj.f = fn;
+
+		obj.f.apply(); // 1
+
+		obj.f.apply(obj); // 0
+
+	</pre>
+	<p>参考：<a href="http://www.ruanyifeng.com/blog/2010/04/using_this_keyword_in_javascript.html" target="_blank">Javascript的this用法</a></p>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
